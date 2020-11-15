@@ -5,8 +5,8 @@ provider "aws" {
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
   name           = "${var.tablename}"
   billing_mode   = "PROVISIONED"
-  read_capacity  = 20
-  write_capacity = 20
+  read_capacity  = "${var.read_capacity}"
+  write_capacity = "${var.write_capacity}"
   hash_key       = "${var.hashkey_name}"
   range_key      = "${var.rangekey_name}"
 
@@ -29,8 +29,8 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     name               = "${var.global_secondary_index_name}"
     hash_key           = "${var.hashkey_name}"
     range_key          = "${var.rangekey_name}"
-    write_capacity     = 10
-    read_capacity      = 10
+    write_capacity     = "${var.global_secondary_index_write_capacity}"
+    read_capacity      = "${var.global_secondary_index_read_capacity"
     projection_type    = "INCLUDE"
     non_key_attributes = ["${var.hashkey_name}"]
   }
