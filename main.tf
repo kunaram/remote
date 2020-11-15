@@ -26,7 +26,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   global_secondary_index {
-    name               = "GameTitleIndex"
+    name               = "${var.global_secondary_index_name}"
     hash_key           = "${var.hashkey_name}"
     range_key          = "${var.rangekey_name}"
     write_capacity     = 10
@@ -37,6 +37,6 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
 
   tags = {
     Name        = "dynamodb-table-1"
-    Environment = "production"
+    Environment = "dev"
   }
 }
