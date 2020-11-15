@@ -30,7 +30,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     hash_key           = "${var.hashkey_name}"
     range_key          = "${var.rangekey_name}"
     write_capacity     = "${var.global_secondary_index_write_capacity}"
-    read_capacity      = "${var.global_secondary_index_read_capacity"
+    read_capacity      = "${var.global_secondary_index_read_capacity}"
     projection_type    = "INCLUDE"
     non_key_attributes = ["${var.hashkey_name}"]
   }
