@@ -24,7 +24,18 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     attribute_name = "TimeToExist"
     enabled        = false
   }
-
+  
+  global_secondary_index_names {
+    count = (var.enabled ? 1 : 0) * length(var.global_secondary_index_map)
+   
+    # Convert the multi-item `global_secondary_index_map` into a simple `map` with just one item `name` since `triggers` does not support `lists` in `maps` (which are used in `non_key_attributes`)
+    triggers = {
+      "name" = var.global_secondary_index_map[count.index]["name"]
+    }
+  }
+  
+  
+/*
   global_secondary_index {
     name               = "${var.global_secondary_index_name}"
     hash_key           = "${var.global_secondary_index_hash_key_name}"
@@ -34,7 +45,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     projection_type    = "INCLUDE"
     non_key_attributes = ["${var.global_secondary_index_hash_key_name}"]
   }
-
+*/
   tags = {
     Name        = "dynamodb-table-1"
     Environment = "dev"
