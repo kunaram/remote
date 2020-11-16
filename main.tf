@@ -3,21 +3,21 @@ provider "aws" {
   version = "~> 3.13.0"
 }
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "${var.tablename}"
+  name           = "${var.table_name}"
   billing_mode   = "PROVISIONED"
   read_capacity  = "${var.read_capacity}"
   write_capacity = "${var.write_capacity}"
-  hash_key       = "${var.hashkey_name}"
-  range_key      = "${var.rangekey_name}"
+  hash_key       = "${var.hash_key}"
+  range_key      = "${var.range_key}"
 
   attribute {
-    name = "${var.hashkey_name}"
-    type = "${var.hashkey_type}"
+    name = "${var.hash_key}"
+    type = "${var.hash_key_type}"
   }
 
   attribute {
-    name = "${var.rangekey_name}"
-    type = "${var.rangekey_type}"
+    name = "${var.range_key_name}"
+    type = "${var.range_key_type}"
   }
 
   ttl {
@@ -27,12 +27,12 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
 
   global_secondary_index {
     name               = "${var.global_secondary_index_name}"
-    hash_key           = "${var.hashkey_name}"
-    range_key          = "${var.rangekey_name}"
+    hash_key           = "${var.global_secondary_index_hash_key_name}"
+    range_key          = "${var.global_secondary_index_range_key_name}"
     write_capacity     = "${var.global_secondary_index_write_capacity}"
     read_capacity      = "${var.global_secondary_index_read_capacity}"
     projection_type    = "INCLUDE"
-    non_key_attributes = ["${var.hashkey_name}"]
+    non_key_attributes = ["${var.global_secondary_index_hash_key_name}"]
   }
 
   tags = {
