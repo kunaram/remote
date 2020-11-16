@@ -27,6 +27,18 @@ variable "range_key_type" {
   description = "Range Key type, which must be a scalar type: `S`, `N`, or `B` for (S)tring, (N)umber or (B)inary data"
 }
 
+variable "read_capacity" {
+  type = number
+  default = 10
+  description = "cost will effect as the read capacity units number increase"
+}
+
+variable "write_capacity" {
+  type = number
+  default = 10
+  description = "cost will effect as the write capacity units number increase"  
+}
+
 /*
 variable "global_secondary_index_name" {}
 
@@ -54,4 +66,6 @@ variable "local_secondary_index_map" {
   default     = []
   description = "Additional local secondary indexes in the form of a list of mapped values"
 }
+
+
 */
